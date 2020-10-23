@@ -4,11 +4,13 @@ import {RouterModule} from "@angular/router";
 import {HeaderComponent} from "./components/header/header.component";
 import {HighchartsChartModule} from "highcharts-angular";
 import { AreaComponent } from './widgets/area/area.component';
+import { PieComponent } from './widgets/pie/pie.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    AreaComponent
+    AreaComponent,
+    PieComponent
   ],
   imports: [
     CommonModule,
@@ -17,6 +19,8 @@ import { AreaComponent } from './widgets/area/area.component';
   ],
   exports:[
     HeaderComponent,
+    AreaComponent,
+    PieComponent
 
 
   ]
