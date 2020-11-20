@@ -1,1 +1,27 @@
-<p>login works!</p>
+<div class="hero">
+<div class="row">
+  <div class="col-5">
+    <div class="card formCard">
+      <div class="card-body body">
+        <h5 class="card-title title">LOW LOW BURGUER'S TEAM</h5>
+        <form [formGroup]="formLogin" >
+          <div class="form-group">
+            <input type="email" formControlName="email" placeholder="Email Adress" class="form-control radius" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+          <div class="form-group">
+            <input type="password" formControlName="password" placeholder="Password" class="form-control radius" id="exampleInputPassword1">
+          </div>
+        </form>
+        <div class="row" style="padding-top: 10%">
+          <div class="col">
+            <button type="button" (click)="login()" [disabled]="!formLogin.valid" class="btn btn-green">Sign in</button></div>
+          <div class="col">
+            <a class="forgot" href="/recuperar">forgot password?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col"></div>
+</div>
+</div>

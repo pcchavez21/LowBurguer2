@@ -7,12 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+
   constructor() { }
 
   ngOnInit(): void {
   }
-  //SignOut(){
-    //localStorage.clear();
-  //}
+  SignOut(){
+    localStorage.clear();
+    window.location.reload();
+  }
+
 
 }

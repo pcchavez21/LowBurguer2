@@ -1,7 +1,18 @@
-.navbar-nav{
-  align-content: end;
-  align-items: end;
+.nav{
+  opacity: .9; background-color: #2A2A2A; position: relative
 }
-.nav-item > .active{
+.nav:active{
   color: orange;
+}
+.nav-link{
+  color: white;
+}
+.nav-link:active{
+  color: orange;
+}
+.dropdown{
+  left: 1%;
+}
+.listNav{
+  padding-left: 1000px;
 }

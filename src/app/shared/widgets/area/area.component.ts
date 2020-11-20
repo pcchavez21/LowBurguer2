@@ -21,7 +21,7 @@ export class AreaComponent implements OnInit {
         backgroundColor: 'rgba(0,0,0,.5)'
       },
       title: {
-        text: 'Low Low Sales'
+        text: 'Ventas en el dia'
       },
       subtitle: {
         text: 'Static Info'

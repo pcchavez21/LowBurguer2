@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { WsService} from '../../services';
 import {Subject} from "rxjs";
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {FormBuilder, FormGroup, FormsModule, Validator, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-sales',
@@ -11,13 +14,14 @@ export class SalesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   table : any;
-  constructor() {
+  constructor(public ws: WsService, private modalService: NgbModal,private formBuilder: FormBuilder) {
 
   }
 
   ngOnInit(): void {
     this.dtOptions = {
-      pageLength: 10,
+      autoWidth: true,
+      pageLength: 5,
       pagingType: 'full_numbers',
       language: {
         processing: "Procesando...",
@@ -42,6 +46,11 @@ export class SalesComponent implements OnInit {
         }
       }
     }
+    this.ws.WS_ORDENES().subscribe(data => {
+      this.table = data;
+      console.log(data);
+      this.dtTrigger.next();
+    });
   }
 
 }

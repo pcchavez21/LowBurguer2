@@ -1,9 +1,10 @@
 import {NgModule} from '@angular/core';
 import {SalesRoutingModule} from './sales-routing.module';
 import {SalesComponent} from './sales.component';
-//import {ReactiveFormsModule} from "@angular/forms";
+import {ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
 import {DataTablesModule} from "angular-datatables";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -11,9 +12,10 @@ import {DataTablesModule} from "angular-datatables";
   ],
   imports: [
     SalesRoutingModule,
-    //ReactiveFormsModule,
+    ReactiveFormsModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    CommonModule
 
   ]
 })
