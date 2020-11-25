@@ -16,13 +16,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.getUsers();
+
   }
-  //getUsers(){
-    //this.ws.WS_USERS().subscribe(data =>{
-      //console.log(data);
-    //})
-  //}
+
   formulario(){
     this.formLogin = this.formBuilder.group({
       email:['', Validators.required],
@@ -30,13 +26,17 @@ export class LoginComponent implements OnInit {
     })
   }
   login(){
-    const provider = this.formLogin.value;
-    console.log(provider);
-    this.ws.WS_LOGIN(provider).subscribe(data =>{
+    const provider = [{
+      "email":this.formLogin.value.email,
+      "password":this.formLogin.value.password,
+    }]
+    console.log(JSON.stringify(provider));
+    this.ws.WS_LOGIN(JSON.stringify(provider)).subscribe(data =>{
       console.log(data);
-      if(data['rol'] == 2){
+      if(data['rol'] == 1){
         localStorage.setItem('login','true');
-        localStorage.setItem('email', this.formLogin.value.email);
+        localStorage.setItem('rol',data['rol']);
+        //localStorage.setItem('email', this.formLogin.value.email);
         console.log("Log in");
         this.router.navigate(['/home']);
       }else{

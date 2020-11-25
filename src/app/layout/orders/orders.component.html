@@ -5,34 +5,19 @@
       <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"  class="table table-bordered">
         <thead class="thead-dark">
         <tr>
-     <!--     <th>Orden</th>
-          <th>Cantidad de productos</th>
-          <th>Total de venta</th>
+          <th>Folio</th>
+          <th>Cliente</th>
           <th>Fecha de entrega</th>
-          <th>Nombre</th>
           <th>Dirección</th>
-          <th>Detalle</th>-->
-          <th>Orden</th>
-          <th>Cantidad de productos</th>
-          <th>Total de venta</th>
-          <th>Fecha de creación</th>
-          <th>Estado de orden</th>
           <th>Detalle</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let item of table">
-          <td>{{item.numero_orden}}</td>
-          <td>{{item.cantidad_productos}}</td>
-          <td>{{item.total}}</td>
-          <td>{{item.fecha_creacion}}</td>
-          <td>{{item.estado_orden}}</td>
-          <!--<td>numero_orden</td>
-          <td>cantidad_productos</td>
-          <td>item.total</td>
-          <td>fecha_creacion</td>
-          <td>fecha_creacion</td>
-          <td>estado_orden</td>-->
+          <td>{{item.folio}}</td>
+          <td>{{item.user}}</td>
+          <td>{{item.delivery}}</td>
+          <td>{{item.address}}</td>
           <td style="text-align: center">
             <div class="btn-group" role="group" aria-label="Basic example">
               <button type="button" class="btn btn-outline-primary mr-1">

@@ -43,27 +43,35 @@
 .ordenCard{
   position: absolute;
   width: 100%;
-  height: 80%;
+  height: 70%;
   background-color: #242424;
   border-radius: 30px;
 
 }
 .ordenItem{
-  background-color: white;
   border-radius: 15px;
-  width: 90%;
+  width: 100%;
   position: relative;
-  left: 5%;
+  left: 2%;
   right: 5%;
   top: 5%;
-  margin-top: 2%;
+  margin-top: 5%;
+}
+.back{
+  background-color: white;
+  border-radius: 15px;
+  width: 100%;
+  position: relative;
+  left: 10%;
+  margin-top: 10%;
+
 }
 .ordenConfirm{
   background-color: #242424;
   position: absolute;
   height: 15%;
   width: 100%;
-  top: 85%;
+  top: 100%;
 }
 .centerItm{
   position: relative;
@@ -76,7 +84,7 @@
   border-radius: 15px;
 }
 .lista{
-  padding-left: 5%;
+  padding-left: 2%;
 }
 
 

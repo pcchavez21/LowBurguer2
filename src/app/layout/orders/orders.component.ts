@@ -45,7 +45,7 @@ export class OrdersComponent implements OnInit {
       }
     }
     this.ws.WS_ORDENES().subscribe(data => {
-      this.table = data;
+      this.table = data["orders"];
       console.log(data);
       this.dtTrigger.next();
     });
