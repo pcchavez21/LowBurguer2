@@ -1,13 +1,17 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { HttpHeaders} from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root'
 })
 export class WsService {
   constructor(public http: HttpClient) {
   }
-  WS_LOGIN(data){
-    return this.http.post(' https://low-low-burger.herokuapp.com/login',data);
+  WS_LOGIN(email, password){
+    const em = email;
+    const pass = password;
+    return this.http.post(' https://low-low-burger.herokuapp.com/login', {email: em, password: pass});
   }
   WS_ORDENES(){
     return this.http.get('https://low-low-burger.herokuapp.com/orders',{});

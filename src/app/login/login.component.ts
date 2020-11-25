@@ -21,19 +21,18 @@ export class LoginComponent implements OnInit {
 
   formulario(){
     this.formLogin = this.formBuilder.group({
-      email:['', Validators.required],
-      password:['', Validators.required]
-    })
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
   login(){
-    const provider = [{
-      "email":this.formLogin.value.email,
-      "password":this.formLogin.value.password,
-    }]
-    console.log(JSON.stringify(provider));
-    this.ws.WS_LOGIN(JSON.stringify(provider)).subscribe(data =>{
+    const provider = {
+      email : this.formLogin.value.email,
+      password: this.formLogin.value.password,
+    };
+    this.ws.WS_LOGIN(provider.email, provider.password).subscribe(data => {
       console.log(data);
-      if(data['rol'] == 1){
+      if (data['rol'] == 1){
         localStorage.setItem('login','true');
         localStorage.setItem('rol',data['rol']);
         //localStorage.setItem('email', this.formLogin.value.email);
@@ -43,7 +42,8 @@ export class LoginComponent implements OnInit {
         console.log("Error de Credenciales");
         alert("Las credenciales no son correctas");
       }
-    });
+    }
+    );
 
   }
 
