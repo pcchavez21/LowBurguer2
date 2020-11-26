@@ -35,7 +35,7 @@
             <div class="ordenConfirm" >
               <div class="row">
                 <div class="col">
-                  <button type="button" class="btn btn-light centerItm">
+                  <button type="button" class="btn btn-light centerItm" (click)="openM(confirm)">
                     <svg width="2em" height="2em" viewBox="0 0 16 16" color="#008000" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                       <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                       <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
@@ -72,37 +72,107 @@
             <h1>Cantidad: </h1>
             <input type="number" min="1" [(ngModel)]="amountVar" >
             <h1>Comentarios: </h1>
-            <input type="text" [(ngModel)]="instruccionesVar">
+            <input type="text" placeholder="Comentarios" [(ngModel)]="instruccionesVar">
             <h1 style="text-align: center;" >Extras:</h1>
             <div class="form-group">
-              <div class="form-check">
-                <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="cebollaVar" type="checkbox" id="extra1">
-                <label class="form-check-label" for="extra1">
-                  Cebolla
-                </label>
+              <div class="row">
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="tocinoVar" type="checkbox" id="extra1">
+                    <label class="form-check-label" for="extra1">
+                      Tocino
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="cebollaVar" type="checkbox" id="extra2" value="2">
+                    <label class="form-check-label" for="extra2">
+                      Cebolla
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras"  [(ngModel)]="pinaVar" type="checkbox" id="extra3" value="3">
+                    <label class="form-check-label" for="extra3">
+                      Piña
+                    </label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="jalapenoVar" type="checkbox" id="extra4">
+                    <label class="form-check-label" for="extra4">
+                      Jalapeño
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="salchichaVar" type="checkbox" id="extra5">
+                    <label class="form-check-label" for="extra5">
+                      Salchicha
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" [disabled]="noExtras"  [(ngModel)]="quesoVar" type="checkbox" id="extra6" >
+                    <label class="form-check-label" for="extra6">
+                      Queso
+                    </label>
+                  </div>
+                </div>
               </div>
               <div class="form-check">
-                <input class="form-check-input" [disabled]="noExtras" [(ngModel)]="quesoVar" type="checkbox" id="extra2" value="2">
-                <label class="form-check-label" for="extra2">
-                  Queso
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" [disabled]="cebollaVar || quesoVar"  [(ngModel)]="noExtras" type="checkbox" id="extra3" value="3">
-                <label class="form-check-label" for="extra3">
+                <input class="form-check-input" [disabled]="cebollaVar || quesoVar || salchichaVar || jalapenoVar || pinaVar || tocinoVar"  [(ngModel)]="noExtras" type="checkbox" id="extra7" >
+                <label class="form-check-label" for="extra7">
                   Sin extras
                 </label>
               </div>
-              <input type="date" [(ngModel)]="date">
-              <input type="time" [(ngModel)]="time">
             </div>
+
           </div>
         </div>
     </div>
     <div class="modal-footer-editar" >
-      <button type="button" class="btn btn-outline-dark mr-3"  (click)="modal.close();addList(modalArray)">Ok</button>
+      <button type="button" class="btn btn-outline-dark mr-3"  (click)="modal.close();addList(modalArray);">Ok</button>
       <button type="button" class="btn btn-outline-primary" (click)="modal.close()" >Cerrar</button>
     </div>
+  </ng-template>
+
+  <ng-template #confirm let-modal>
+    <div class="modal-body" style="background-color: #2A2A2A">
+
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="exampleInputText" style="color: white" >Dirección: </label>
+            <input type="text" class="form-control" [(ngModel)]="direccion" style="margin-top: 5px" id="exampleInputText"  placeholder="Ingresa la dirección de entrega: ">
+          </div>
+
+        </div>
+        <div class="col">
+          <div class="form-check">
+            <label style="color: white" for="fecha" >Fecha de entrega: </label>
+            <input type="date" style="margin-left: 10px" id="fecha" [(ngModel)]="date">
+          </div>
+          <div class="form-check">
+            <label style="color: white" for="hora">Hora de entrega: </label>
+            <input type="time" style="margin-left: 10px" id="hora" step="1" [(ngModel)]="time">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer-editar"style="background-color: #2A2A2A">
+      <button type="button" class="btn btn-light confirm" (click)="modal.close();crearOrden()">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" color="#008000" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+        </svg>
+        OK!
+      </button>
+      <button type="button" class="btn btn-light confirm" (click)="modal.close()">Cancelar</button>
+
+    </div>
+
+
+
   </ng-template>
 
 </div>

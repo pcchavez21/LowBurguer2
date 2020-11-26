@@ -32,10 +32,10 @@ export class LoginComponent implements OnInit {
     };
     this.ws.WS_LOGIN(provider.email, provider.password).subscribe(data => {
       console.log(data);
-      if (data['rol'] == 1){
+      console.log(data['user'][0].rol);
+      if (data['user'][0].rol == 2){
         localStorage.setItem('login','true');
-        localStorage.setItem('rol',data['rol']);
-        //localStorage.setItem('email', this.formLogin.value.email);
+        localStorage.setItem('username',data['user'][0].id);
         console.log("Log in");
         this.router.navigate(['/home']);
       }else{

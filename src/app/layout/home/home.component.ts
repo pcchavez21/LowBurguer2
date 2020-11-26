@@ -18,8 +18,13 @@ export class HomeComponent implements OnInit {
   extrasArray = {
     amount:'', instructions:'', id_product:'', toppings:[]
   };
+  products =[];
   instruccionesVar= '';
   amountVar= 1;
+  tocinoVar: any;
+  pinaVar:any;
+  jalapenoVar:any;
+  salchichaVar:any;
   quesoVar : any;
   cebollaVar : any;
   noExtras: any;
@@ -28,6 +33,7 @@ export class HomeComponent implements OnInit {
   list = [];
   date: any;
   time: any;
+  direccion:any;
 
   constructor(private modalService: NgbModal,private formBuilder: FormBuilder,private ws: WsService) { }
 
@@ -36,6 +42,9 @@ export class HomeComponent implements OnInit {
   }
   open(content) {
     this.modalService.open(content,{size: 'lg',centered: true});
+  }
+  openM(content) {
+    this.modalService.open(content,{size:"lg",centered: true});
   }
   getProducts(){
     this.ws.WS_PRODUCTS().subscribe(data=>{
@@ -51,51 +60,97 @@ export class HomeComponent implements OnInit {
       cantidad: this.amountVar,
       precio: product.precio
     });
-    this.extrasArray.toppings = [];
       this.extrasArray['amount'] = this.amountVar.toString();
       let T = this.amountVar * parseInt(this.modalArray.precio);
       this.suma = this.suma + T;
-      this.amountVar = 0;
+      this.amountVar = 1;
       this.extrasArray['instructions'] = this.instruccionesVar;
       this.instruccionesVar = '';
       this.extrasArray['id_product'] = this.modalArray.id;
       if (this.noExtras){
-        let E = 3;
+        const E = 1;
         this.extrasArray.toppings.push(E);
-      }else if (this.cebollaVar && this.quesoVar){
-        let Q =2;
-        let C =1;
-        this.extrasArray.toppings.push(C,Q);
-      } else if (this.cebollaVar == false && this.quesoVar){
-        let Q =2;
-        this.extrasArray.toppings.push(Q);
-      } else if (this.cebollaVar && this.quesoVar == false){
-        let C=1;
-        this.extrasArray.toppings.push(C);
-      }else{
-        let E =3;
-        this.extrasArray.toppings.push(E);
+        this.noExtras = !this.noExtras;
       }
-
-    console.log(this.noExtras);
+      if (this.tocinoVar){
+        const T = 2;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(T);
+        this.tocinoVar = !this.tocinoVar;
+      }
+      if (this.cebollaVar){
+        const C = 3;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(C);
+        this.cebollaVar = !this.cebollaVar;
+      }
+      if (this.pinaVar){
+        const P = 4;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(P);
+        this.pinaVar = !this.pinaVar;
+      }
+      if (this.jalapenoVar){
+        const J = 5;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(J);
+        this.jalapenoVar = !this.jalapenoVar;
+      }
+      if (this.salchichaVar){
+        const S = 6;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(S);
+        this.salchichaVar = !this.salchichaVar;
+      }if (this.quesoVar){
+        const Q = 7;
+        this.suma= this.suma + 10;
+        this.extrasArray.toppings.push(Q);
+        this.quesoVar = !this.quesoVar;
+      }
+      this.products.push({
+        amount: parseInt(this.extrasArray.amount),
+        instructions: this.extrasArray.instructions,
+        id_product: this.extrasArray.id_product,
+        toppings: this.extrasArray.toppings
+      });
     console.log(this.extrasArray);
     console.log(this.lista2);
-    console.log(this.date);
-    console.log(this.time);
     console.log(this.suma);
+    console.log(this.products);
   }
   removeList(item,i){
   this.list.splice(i,1);
   let R = parseInt(item.precio) * item.cantidad
   this.suma = this.suma - R;
+  if (this.extrasArray.toppings[0] != 1){
+    let RT = this.extrasArray.toppings.length * 10
+    this.suma = this.suma -RT;
+  }
   }
   burguerModal(item){
+    this.extrasArray.toppings = [];
     this.modalArray.id = item.id;
     this.modalArray.nombre = item.name;
     this.modalArray.descripcion = item.description;
     this.modalArray.imagen = item.image;
     this.modalArray.precio = item.price;
     console.log(this.modalArray);
+  }
+  crearOrden(){
+    const FyH = this.date +' '+this.time;
+    const orden = {
+      user : parseInt(localStorage.getItem('username')),
+      delivery: FyH,
+      address: this.direccion,
+      products: this.products
+    }
+    console.log(JSON.stringify(orden));
+  this.ws.WS_CREARORDENES(JSON.stringify(orden)).subscribe(data=>{
+    console.log(data);
+    if (data == 'success'){
+      alert('Orden creada con éxito');
+    }
+  })
   }
 
 

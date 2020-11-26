@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
-import { HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +14,9 @@ export class WsService {
   }
   WS_ORDENES(){
     return this.http.get('https://low-low-burger.herokuapp.com/orders',{});
+  }
+  WS_CREARORDENES(orden){
+    return this.http.post('https://low-low-burger.herokuapp.com/orders',{orden});
   }
   WS_USERS(){
     return this.http.get('https://low-low-burger.herokuapp.com/users',{});
