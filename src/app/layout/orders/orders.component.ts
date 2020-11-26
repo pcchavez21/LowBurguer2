@@ -14,6 +14,10 @@ export class OrdersComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   table : any;
+  tableProducts = {
+    orden: ''
+  }
+  table2: any;
   constructor(public ws: WsService, private modalService: NgbModal, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -51,6 +55,23 @@ export class OrdersComponent implements OnInit {
     });
     this.ws.WS_USERS().subscribe(dato=>{
       console.log(dato);
+    })
+  }
+  open(content) {
+    this.modalService.open(content,{size: 'lg',centered: true});
+  }
+  FOLIOFun(item){
+    this.tableProducts.orden = item.orden;
+    this.ws.WS_ORDENESFOLIO(item.orden).subscribe(data=>{
+      console.log(data['order'][0]['products']);
+      this.table2 = data['order'][0]['products'];
+    })
+  }
+  UpdateOrden(folio){
+    this.ws.WS_ACTUALIZARORDENES(folio).subscribe(data=>{
+      console.log(data);
+      alert("La orden se ha finalizado con éxito");
+      window.location.reload();
     })
   }
 

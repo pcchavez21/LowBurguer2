@@ -14,6 +14,8 @@ export class SalesComponent implements OnInit {
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
   table : any;
+  fechaInicio = "2020-11-20";
+  fechaFinal = "2020-11-26";
   constructor(public ws: WsService, private modalService: NgbModal,private formBuilder: FormBuilder) {
 
   }
@@ -46,10 +48,16 @@ export class SalesComponent implements OnInit {
         }
       }
     }
-    this.ws.WS_ORDENES().subscribe(data => {
-      this.table = data;
-      console.log(data);
+    this.ws.WS_GRAPH(this.fechaInicio,this.fechaFinal).subscribe(data => {
+      console.log(data['graph_data'][0].orders);
+      this.table = data['graph_data'][0].orders;
       this.dtTrigger.next();
+    });
+  }
+  fechas(){
+    this.ws.WS_GRAPH(this.fechaInicio,this.fechaFinal).subscribe(data => {
+      console.log(data['graph_data'][0].orders);
+      this.table = data['graph_data'][0].orders;
     });
   }
 

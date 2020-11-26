@@ -72,6 +72,11 @@ export class HomeComponent implements OnInit {
         this.extrasArray.toppings.push(E);
         this.noExtras = !this.noExtras;
       }
+      if(!this.noExtras && !this.tocinoVar && !this.cebollaVar && !this.pinaVar && !this.jalapenoVar && !this.salchichaVar && !this.quesoVar){
+        const E = 1;
+        this.extrasArray.toppings.push(E);
+        this.noExtras = !this.noExtras;
+      }
       if (this.tocinoVar){
         const T = 2;
         this.suma= this.suma + 10;
@@ -145,10 +150,11 @@ export class HomeComponent implements OnInit {
       products: this.products
     }
     console.log(JSON.stringify(orden));
-  this.ws.WS_CREARORDENES(JSON.stringify(orden)).subscribe(data=>{
+    this.ws.WS_CREARORDENES(orden).subscribe(data=>{
     console.log(data);
-    if (data == 'success'){
+    if (data['message']){
       alert('Orden creada con éxito');
+      window.location.reload();
     }
   })
   }

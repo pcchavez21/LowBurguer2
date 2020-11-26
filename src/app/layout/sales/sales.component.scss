@@ -1,6 +1,6 @@
 .hero{
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-image: url("src/assets/images/background.png");
   background-size: cover;
   background-position: center;
@@ -8,9 +8,9 @@
   overflow: hidden;
 }
 #widget{
-  padding-top: 180px;
+  padding-top: 100px;
   padding-right: 5px;
 }
 #table{
-  padding-top: 180px;
+  padding-top: 100px;
 }
