@@ -18,12 +18,7 @@ export class PieComponent implements OnInit {
   constructor(private ws: WsService) { }
 
   ngOnInit(): void {
-    this.ws.WS_GRAPH(this.fechaInicio,this.fechaFinal).subscribe(data => {
-      this.top = data['graph_data'][0]['pie-chart'];
-      console.log(this.top);
-      console.log(this.top[0]['name']);
-      console.log(this.top[0]['porcentaje']);
-    });
+
     this.chartOptions = {
       chart: {
         plotBackgroundColor: null,
@@ -75,19 +70,19 @@ export class PieComponent implements OnInit {
           y: parseFloat(this.top[3]['porcentaje'])
         }*/
           {
-            name: 'a',
-            y: 61.41,
+            name: 'Jalapeño',
+            y: 20,
             sliced: true,
             selected: true
           }, {
-            name: 'Internet Explorer',
-            y: 11.84
+            name: 'Pepinillo Rick',
+            y: 20
           }, {
-            name: 'Firefox',
-            y: 10.85
+            name: 'Cartoon Regular',
+            y: 10
           }, {
-            name: 'Edge',
-            y: 4.67
+            name: 'Ghost Burger',
+            y: 50
           }]
       }]
     }

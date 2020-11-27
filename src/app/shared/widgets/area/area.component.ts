@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { WsService} from '../../../services';
 import * as Highcharts from 'highcharts';
-import Exporting from 'highcharts/modules/exporting';
-Exporting(Highcharts);
+
 @Component({
   selector: 'app-widget-area',
   templateUrl: './area.component.html',
@@ -10,11 +10,19 @@ Exporting(Highcharts);
 export class AreaComponent implements OnInit {
   chartOptions: {};
   Highcharts = Highcharts;
-  area: any;
+  fechaInicio = "2020-11-20";
+  fechaFinal = "2020-11-26";
+  top=[];
 
-  constructor() { }
+  constructor(private ws: WsService) { }
 
   ngOnInit(): void {
+    this.ws.WS_GRAPH(this.fechaInicio,this.fechaFinal).subscribe(data => {
+      this.top = data['graph_data'][0]['pie-chart'];
+      console.log(data);
+      console.log(this.top[0]['name']);
+      console.log(this.top[0]['porcentaje']);
+    });
     this.chartOptions = {
       chart: {
         type: 'column',
@@ -28,18 +36,10 @@ export class AreaComponent implements OnInit {
       },
       xAxis: {
         categories: [
-          'Jan',
-          'Feb',
-          'Mar',
-          'Apr',
-          'May',
-          'Jun',
-          'Jul',
-          'Aug',
-          'Sep',
-          'Oct',
-          'Nov',
-          'Dec'
+          this.top[0]['name'].toString(),
+          this.top[1]['name'].toString(),
+          this.top[2]['name'].toString(),
+          this.top[3]['name'].toString()
         ],
         crosshair: true
       },
@@ -63,14 +63,15 @@ export class AreaComponent implements OnInit {
           borderWidth: 0
         }
       },
+      colors: ['#fff'],
       series: [{
-        name: 'Tokyo',
-        data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-
-      }, {
-        name: 'New York',
-        data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-
+        name: 'Porcentaje de ventas',
+        data: [
+          parseFloat(this.top[0]['porcentaje']),
+          parseFloat(this.top[1]['porcentaje']),
+          parseFloat(this.top[2]['porcentaje']),
+          parseFloat(this.top[3]['porcentaje'])
+        ]
       }]
     }
   }

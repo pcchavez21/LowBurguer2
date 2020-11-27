@@ -64,6 +64,9 @@ export class HomeComponent implements OnInit {
       let T = this.amountVar * parseInt(this.modalArray.precio);
       this.suma = this.suma + T;
       this.amountVar = 1;
+      if (this.instruccionesVar == ''){
+        this.instruccionesVar = 'Sin comentarios';
+      }
       this.extrasArray['instructions'] = this.instruccionesVar;
       this.instruccionesVar = '';
       this.extrasArray['id_product'] = this.modalArray.id;
